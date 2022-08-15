@@ -1,0 +1,424 @@
+Started POST "/fruits" for 153.246.233.1 at 2022-08-15 10:26:33 +0000
+Cannot render console from 153.246.233.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "fruit"=>{"name"=>"hoge", "image"=>#<ActionDispatch::Http::UploadedFile:0x00000000037abf18 @tempfile=#<Tempfile:/tmp/RackMultipart20220815-27552-mom6tp.png>, @original_filename="スクリーンショット 2022-07-27 10.42.32.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"fruit[image]\"; filename=\"\xE3\x82\xB9\xE3\x82\xAF\xE3\x83\xAA\xE3\x83\xBC\xE3\x83\xB3\xE3\x82\xB7\xE3\x83\xA7\xE3\x83\x83\xE3\x83\x88 2022-07-27 10.42.32.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save"}
+  TRANSACTION (2.7ms)  BEGIN
+  ↳ app/controllers/fruits_controller.rb:30:in `block in create'
+  Fruit Load (2.7ms)  SELECT `fruits`.`id`, `fruits`.`row_order` FROM `fruits` ORDER BY `fruits`.`row_order` DESC LIMIT 1
+  ↳ app/controllers/fruits_controller.rb:30:in `block in create'
+  Fruit Exists? (2.7ms)  SELECT 1 AS one FROM `fruits` WHERE `fruits`.`row_order` = 1073741824 LIMIT 1
+  ↳ app/controllers/fruits_controller.rb:30:in `block in create'
+  Fruit Create (2.6ms)  INSERT INTO `fruits` (`name`, `row_order`, `created_at`, `updated_at`) VALUES ('hoge', 1073741824, '2022-08-15 10:26:33.941155', '2022-08-15 10:26:33.941155')
+  ↳ app/controllers/fruits_controller.rb:30:in `block in create'
+  ActiveStorage::Blob Load (3.0ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` INNER JOIN `active_storage_attachments` ON `active_storage_blobs`.`id` = `active_storage_attachments`.`blob_id` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/controllers/fruits_controller.rb:30:in `block in create'
+  ActiveStorage::Attachment Load (3.2ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/controllers/fruits_controller.rb:30:in `block in create'
+  ActiveStorage::Blob Create (2.8ms)  INSERT INTO `active_storage_blobs` (`key`, `filename`, `content_type`, `metadata`, `service_name`, `byte_size`, `checksum`, `created_at`) VALUES ('fpcc5edc14ffgr6ghweklb2xvg36', 'スクリーンショット 2022-07-27 10.42.32.png', 'image/png', '{\"identified\":true}', 'amazon', 2116562, 'xgI6SfrTrZi+1qY7h7lt+Q==', '2022-08-15 10:26:33')
+  ↳ app/controllers/fruits_controller.rb:30:in `block in create'
+  ActiveStorage::Attachment Create (2.7ms)  INSERT INTO `active_storage_attachments` (`name`, `record_type`, `record_id`, `blob_id`, `created_at`) VALUES ('image', 'Fruit', 19, 41, '2022-08-15 10:26:33')
+  ↳ app/controllers/fruits_controller.rb:30:in `block in create'
+  Fruit Update (2.6ms)  UPDATE `fruits` SET `fruits`.`updated_at` = '2022-08-15 10:26:33.964404' WHERE `fruits`.`id` = 19
+  ↳ app/controllers/fruits_controller.rb:30:in `block in create'
+  TRANSACTION (5.7ms)  COMMIT
+  ↳ app/controllers/fruits_controller.rb:30:in `block in create'
+  S3 Storage (106.5ms) Uploaded file to key: fpcc5edc14ffgr6ghweklb2xvg36 (checksum: xgI6SfrTrZi+1qY7h7lt+Q==)
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 391f84a8-25d4-48f5-a625-37afc353ea5e) to Async(default) with arguments: #<GlobalID:0x00007f1f31eaa7e8 @uri=#<URI::GID gid://raisetech-live8-sample-app/ActiveStorage::Blob/41>>
+Redirected to http://13.114.48.147:3000/fruits/19
+Completed 302 Found in 173ms (ActiveRecord: 30.6ms | Allocations: 15675)
+
+
+  ActiveStorage::Blob Load (2.2ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+[ActiveJob] [ActiveStorage::AnalyzeJob] [391f84a8-25d4-48f5-a625-37afc353ea5e] Performing ActiveStorage::AnalyzeJob (Job ID: 391f84a8-25d4-48f5-a625-37afc353ea5e) from Async(default) enqueued at 2022-08-15T10:26:34Z with arguments: #<GlobalID:0x00007f1f321489c8 @uri=#<URI::GID gid://raisetech-live8-sample-app/ActiveStorage::Blob/41>>
+Started GET "/fruits/19" for 153.246.233.1 at 2022-08-15 10:26:34 +0000
+Cannot render console from 153.246.233.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#show as HTML
+  Parameters: {"id"=>"19"}
+  Fruit Load (2.6ms)  SELECT `fruits`.* FROM `fruits` WHERE `fruits`.`id` = 19 LIMIT 1
+  ↳ app/controllers/fruits_controller.rb:74:in `set_fruit'
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/show.html.slim within layouts/application
+  ActiveStorage::Attachment Load (5.6ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/show.html.slim:9
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/show.html.slim:10
+  Rendered fruits/show.html.slim within layouts/application (Duration: 15.0ms | Allocations: 7384)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.4ms | Allocations: 153)
+  Rendered layouts/_messages.html.slim (Duration: 1.3ms | Allocations: 52)
+  Rendered layout layouts/application.html.slim (Duration: 19.6ms | Allocations: 9461)
+Completed 200 OK in 28ms (Views: 11.8ms | ActiveRecord: 11.0ms | Allocations: 12296)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [391f84a8-25d4-48f5-a625-37afc353ea5e]   S3 Storage (105.5ms) Downloaded file from key: fpcc5edc14ffgr6ghweklb2xvg36
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBMZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--dee2984923b72fdf4eaf11418ca0a4d0c24bdef1/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2QzNKbGMybDZaVWtpRERnMk1IZzFOek1HT3daVSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--27e143d2595f5317db4ed330fa3650083eb9fa0c/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202022-07-27%2010.42.32.png" for 153.246.233.1 at 2022-08-15 10:26:34 +0000
+Cannot render console from 153.246.233.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ActiveStorage::Representations::RedirectController#show as PNG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBMZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--dee2984923b72fdf4eaf11418ca0a4d0c24bdef1", "variation_key"=>"[FILTERED]", "filename"=>"スクリーンショット 2022-07-27 10.42.32"}
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ActiveStorage::VariantRecord Load (4.8ms)  SELECT `active_storage_variant_records`.* FROM `active_storage_variant_records` WHERE `active_storage_variant_records`.`blob_id` = 41 AND `active_storage_variant_records`.`variation_digest` = 'sFWbD47X+WcS8hXYrpFxUvE0Uaw=' LIMIT 1
+  S3 Storage (118.2ms) Downloaded file from key: fpcc5edc14ffgr6ghweklb2xvg36
+[ActiveJob] [ActiveStorage::AnalyzeJob] [391f84a8-25d4-48f5-a625-37afc353ea5e]   TRANSACTION (2.1ms)  BEGIN
+[ActiveJob] [ActiveStorage::AnalyzeJob] [391f84a8-25d4-48f5-a625-37afc353ea5e]   ActiveStorage::Blob Update (2.2ms)  UPDATE `active_storage_blobs` SET `active_storage_blobs`.`metadata` = '{\"identified\":true,\"width\":2700,\"height\":1796,\"analyzed\":true}' WHERE `active_storage_blobs`.`id` = 41
+[ActiveJob] [ActiveStorage::AnalyzeJob] [391f84a8-25d4-48f5-a625-37afc353ea5e]   TRANSACTION (6.9ms)  COMMIT
+[ActiveJob] [ActiveStorage::AnalyzeJob] [391f84a8-25d4-48f5-a625-37afc353ea5e] Performed ActiveStorage::AnalyzeJob (Job ID: 391f84a8-25d4-48f5-a625-37afc353ea5e) from Async(default) in 345.62ms
+  TRANSACTION (2.9ms)  BEGIN
+  ActiveStorage::VariantRecord Create (3.9ms)  INSERT INTO `active_storage_variant_records` (`blob_id`, `variation_digest`) VALUES (41, 'sFWbD47X+WcS8hXYrpFxUvE0Uaw=')
+  ActiveStorage::Blob Load (2.9ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` INNER JOIN `active_storage_attachments` ON `active_storage_blobs`.`id` = `active_storage_attachments`.`blob_id` WHERE `active_storage_attachments`.`record_id` = 22 AND `active_storage_attachments`.`record_type` = 'ActiveStorage::VariantRecord' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ActiveStorage::Attachment Load (4.6ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 22 AND `active_storage_attachments`.`record_type` = 'ActiveStorage::VariantRecord' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ActiveStorage::Blob Create (3.3ms)  INSERT INTO `active_storage_blobs` (`key`, `filename`, `content_type`, `metadata`, `service_name`, `byte_size`, `checksum`, `created_at`) VALUES ('55sm5oszhgyowru29kc005h1y5kc', 'スクリーンショット 2022-07-27 10.42.32.png', 'image/png', '{\"identified\":true}', 'amazon', 293794, 'groEXfW0HltNuRbUmT4m5w==', '2022-08-15 10:26:34')
+  ActiveStorage::Attachment Create (3.4ms)  INSERT INTO `active_storage_attachments` (`name`, `record_type`, `record_id`, `blob_id`, `created_at`) VALUES ('image', 'ActiveStorage::VariantRecord', 22, 42, '2022-08-15 10:26:34')
+  TRANSACTION (5.4ms)  COMMIT
+  S3 Storage (111.0ms) Uploaded file to key: 55sm5oszhgyowru29kc005h1y5kc (checksum: groEXfW0HltNuRbUmT4m5w==)
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 63d6de5b-ffce-4237-889f-09b757b48c63) to Async(default) with arguments: #<GlobalID:0x000000000697fe90 @uri=#<URI::GID gid://raisetech-live8-sample-app/ActiveStorage::Blob/42>>
+  S3 Storage (6.0ms) Generated URL for file at key: 55sm5oszhgyowru29kc005h1y5kc (https://aws-lecture05.s3.ap-northeast-1.amazonaws.com/55sm5oszhgyowru29kc005h1y5kc?response-content-disposition=inline%3B%20filename%3D%22%253F%253F%253F%253F%253F%253F%253F%253F%253F%202022-07-27%2010.42.32.png%22%3B%20filename%2A%3DUTF-8%27%27%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25202022-07-27%252010.42.32.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4ZFWEZVPRDHKB6EC%2F20220815%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20220815T102635Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=f52733470e578e2a4018403df94061d1c1904179b101d444f7dfcfd4ad5ca9cf)
+Redirected to https://aws-lecture05.s3.ap-northeast-1.amazonaws.com/55sm5oszhgyowru29kc005h1y5kc?response-content-disposition=inline%3B%20filename%3D%22%253F%253F%253F%253F%253F%253F%253F%253F%253F%202022-07-27%2010.42.32.png%22%3B%20filename%2A%3DUTF-8%27%27%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25202022-07-27%252010.42.32.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4ZFWEZVPRDHKB6EC%2F20220815%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20220815T102635Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=f52733470e578e2a4018403df94061d1c1904179b101d444f7dfcfd4ad5ca9cf
+Completed 302 Found in 821ms (ActiveRecord: 33.9ms | Allocations: 28622)
+
+
+  ActiveStorage::Blob Load (2.2ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 42 LIMIT 1
+[ActiveJob] [ActiveStorage::AnalyzeJob] [63d6de5b-ffce-4237-889f-09b757b48c63] Performing ActiveStorage::AnalyzeJob (Job ID: 63d6de5b-ffce-4237-889f-09b757b48c63) from Async(default) enqueued at 2022-08-15T10:26:35Z with arguments: #<GlobalID:0x00007f1f3caa38d8 @uri=#<URI::GID gid://raisetech-live8-sample-app/ActiveStorage::Blob/42>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [63d6de5b-ffce-4237-889f-09b757b48c63]   S3 Storage (63.8ms) Downloaded file from key: 55sm5oszhgyowru29kc005h1y5kc
+[ActiveJob] [ActiveStorage::AnalyzeJob] [63d6de5b-ffce-4237-889f-09b757b48c63]   TRANSACTION (2.0ms)  BEGIN
+[ActiveJob] [ActiveStorage::AnalyzeJob] [63d6de5b-ffce-4237-889f-09b757b48c63]   ActiveStorage::Blob Update (2.2ms)  UPDATE `active_storage_blobs` SET `active_storage_blobs`.`metadata` = '{\"identified\":true,\"width\":860,\"height\":572,\"analyzed\":true}' WHERE `active_storage_blobs`.`id` = 42
+[ActiveJob] [ActiveStorage::AnalyzeJob] [63d6de5b-ffce-4237-889f-09b757b48c63]   TRANSACTION (6.0ms)  COMMIT
+[ActiveJob] [ActiveStorage::AnalyzeJob] [63d6de5b-ffce-4237-889f-09b757b48c63] Performed ActiveStorage::AnalyzeJob (Job ID: 63d6de5b-ffce-4237-889f-09b757b48c63) from Async(default) in 112.35ms
+Started GET "/" for 10.0.1.23 at 2022-08-15 10:26:35 +0000
+Cannot render console from 10.0.1.23! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.8ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (3.0ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.9ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 22.2ms | Allocations: 5360)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.4ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 25.7ms | Allocations: 7442)
+Completed 200 OK in 29ms (Views: 12.2ms | ActiveRecord: 14.1ms | Allocations: 7841)
+
+
+Started GET "/" for 10.0.16.213 at 2022-08-15 10:26:36 +0000
+Cannot render console from 10.0.16.213! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.7ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.6ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.7ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 21.9ms | Allocations: 5348)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.3ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 25.2ms | Allocations: 7429)
+Completed 200 OK in 28ms (Views: 12.2ms | ActiveRecord: 13.5ms | Allocations: 7817)
+
+
+Started GET "/fruits" for 153.246.233.1 at 2022-08-15 10:26:40 +0000
+Cannot render console from 153.246.233.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.8ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (2.9ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.8ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.9ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (3.9ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 24.0ms | Allocations: 5347)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.4ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 27.3ms | Allocations: 7416)
+Completed 200 OK in 31ms (Views: 12.6ms | ActiveRecord: 15.3ms | Allocations: 7857)
+
+
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBMZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--dee2984923b72fdf4eaf11418ca0a4d0c24bdef1/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2QzNKbGMybDZaVWtpRERFd01IZ3hNREFHT3daVSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--50ae0f5a26612c129d0b0b6760e8f2542b7f8f69/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202022-07-27%2010.42.32.png" for 153.246.233.1 at 2022-08-15 10:26:40 +0000
+Cannot render console from 153.246.233.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ActiveStorage::Representations::RedirectController#show as PNG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBMZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--dee2984923b72fdf4eaf11418ca0a4d0c24bdef1", "variation_key"=>"[FILTERED]", "filename"=>"スクリーンショット 2022-07-27 10.42.32"}
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ActiveStorage::VariantRecord Load (3.7ms)  SELECT `active_storage_variant_records`.* FROM `active_storage_variant_records` WHERE `active_storage_variant_records`.`blob_id` = 41 AND `active_storage_variant_records`.`variation_digest` = '2Bqx5vdSCVhcpp5LZVhC+s+XC9A=' LIMIT 1
+  S3 Storage (152.2ms) Downloaded file from key: fpcc5edc14ffgr6ghweklb2xvg36
+  TRANSACTION (2.9ms)  BEGIN
+  ActiveStorage::VariantRecord Create (2.8ms)  INSERT INTO `active_storage_variant_records` (`blob_id`, `variation_digest`) VALUES (41, '2Bqx5vdSCVhcpp5LZVhC+s+XC9A=')
+  ActiveStorage::Blob Load (3.0ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` INNER JOIN `active_storage_attachments` ON `active_storage_blobs`.`id` = `active_storage_attachments`.`blob_id` WHERE `active_storage_attachments`.`record_id` = 23 AND `active_storage_attachments`.`record_type` = 'ActiveStorage::VariantRecord' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ActiveStorage::Attachment Load (3.1ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 23 AND `active_storage_attachments`.`record_type` = 'ActiveStorage::VariantRecord' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ActiveStorage::Blob Create (3.1ms)  INSERT INTO `active_storage_blobs` (`key`, `filename`, `content_type`, `metadata`, `service_name`, `byte_size`, `checksum`, `created_at`) VALUES ('5l8fq58312xvz5vtyspmuhu2yxl7', 'スクリーンショット 2022-07-27 10.42.32.png', 'image/png', '{\"identified\":true}', 'amazon', 14414, 'vkkAJoFIvdUv08k7KDq64w==', '2022-08-15 10:26:41')
+  ActiveStorage::Attachment Create (2.9ms)  INSERT INTO `active_storage_attachments` (`name`, `record_type`, `record_id`, `blob_id`, `created_at`) VALUES ('image', 'ActiveStorage::VariantRecord', 23, 43, '2022-08-15 10:26:41')
+  TRANSACTION (6.9ms)  COMMIT
+  S3 Storage (64.2ms) Uploaded file to key: 5l8fq58312xvz5vtyspmuhu2yxl7 (checksum: vkkAJoFIvdUv08k7KDq64w==)
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 8dc6b7ff-e8c2-4c5f-a1b6-3ebd9b58d875) to Async(default) with arguments: #<GlobalID:0x00000000060d6d70 @uri=#<URI::GID gid://raisetech-live8-sample-app/ActiveStorage::Blob/43>>
+  S3 Storage (2.7ms) Generated URL for file at key: 5l8fq58312xvz5vtyspmuhu2yxl7 (https://aws-lecture05.s3.ap-northeast-1.amazonaws.com/5l8fq58312xvz5vtyspmuhu2yxl7?response-content-disposition=inline%3B%20filename%3D%22%253F%253F%253F%253F%253F%253F%253F%253F%253F%202022-07-27%2010.42.32.png%22%3B%20filename%2A%3DUTF-8%27%27%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25202022-07-27%252010.42.32.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4ZFWEZVPRDHKB6EC%2F20220815%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20220815T102641Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=56608bde6ddc0ff0e6b61687403251c1228fe9c1fc142adac5eda89130a4d6c4)
+Redirected to https://aws-lecture05.s3.ap-northeast-1.amazonaws.com/5l8fq58312xvz5vtyspmuhu2yxl7?response-content-disposition=inline%3B%20filename%3D%22%253F%253F%253F%253F%253F%253F%253F%253F%253F%202022-07-27%2010.42.32.png%22%3B%20filename%2A%3DUTF-8%27%27%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25202022-07-27%252010.42.32.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4ZFWEZVPRDHKB6EC%2F20220815%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20220815T102641Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=56608bde6ddc0ff0e6b61687403251c1228fe9c1fc142adac5eda89130a4d6c4
+Completed 302 Found in 552ms (ActiveRecord: 31.2ms | Allocations: 34604)
+
+
+  ActiveStorage::Blob Load (2.1ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 43 LIMIT 1
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8dc6b7ff-e8c2-4c5f-a1b6-3ebd9b58d875] Performing ActiveStorage::AnalyzeJob (Job ID: 8dc6b7ff-e8c2-4c5f-a1b6-3ebd9b58d875) from Async(default) enqueued at 2022-08-15T10:26:41Z with arguments: #<GlobalID:0x00007f1f3c1ec690 @uri=#<URI::GID gid://raisetech-live8-sample-app/ActiveStorage::Blob/43>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8dc6b7ff-e8c2-4c5f-a1b6-3ebd9b58d875]   S3 Storage (67.3ms) Downloaded file from key: 5l8fq58312xvz5vtyspmuhu2yxl7
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8dc6b7ff-e8c2-4c5f-a1b6-3ebd9b58d875]   TRANSACTION (2.0ms)  BEGIN
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8dc6b7ff-e8c2-4c5f-a1b6-3ebd9b58d875]   ActiveStorage::Blob Update (2.2ms)  UPDATE `active_storage_blobs` SET `active_storage_blobs`.`metadata` = '{\"identified\":true,\"width\":100,\"height\":67,\"analyzed\":true}' WHERE `active_storage_blobs`.`id` = 43
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8dc6b7ff-e8c2-4c5f-a1b6-3ebd9b58d875]   TRANSACTION (6.7ms)  COMMIT
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8dc6b7ff-e8c2-4c5f-a1b6-3ebd9b58d875] Performed ActiveStorage::AnalyzeJob (Job ID: 8dc6b7ff-e8c2-4c5f-a1b6-3ebd9b58d875) from Async(default) in 94.86ms
+Started GET "/" for 10.0.1.23 at 2022-08-15 10:27:05 +0000
+Cannot render console from 10.0.1.23! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.8ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (2.9ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.6ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 21.6ms | Allocations: 5346)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.3ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 24.8ms | Allocations: 7427)
+Completed 200 OK in 28ms (Views: 11.5ms | ActiveRecord: 13.8ms | Allocations: 7813)
+
+
+Started GET "/" for 10.0.16.213 at 2022-08-15 10:27:06 +0000
+Cannot render console from 10.0.16.213! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.7ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 21.2ms | Allocations: 5356)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.4ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 24.2ms | Allocations: 7437)
+Completed 200 OK in 27ms (Views: 11.0ms | ActiveRecord: 13.7ms | Allocations: 7827)
+
+
+Started GET "/" for 10.0.1.23 at 2022-08-15 10:27:35 +0000
+Cannot render console from 10.0.1.23! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.8ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.6ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.9ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 21.8ms | Allocations: 5357)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.4ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 25.1ms | Allocations: 7439)
+Completed 200 OK in 28ms (Views: 11.7ms | ActiveRecord: 13.8ms | Allocations: 7837)
+
+
+Started GET "/" for 10.0.16.213 at 2022-08-15 10:27:36 +0000
+Cannot render console from 10.0.16.213! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.9ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (6.2ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.8ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 25.3ms | Allocations: 5348)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.3ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 28.5ms | Allocations: 7429)
+Completed 200 OK in 32ms (Views: 11.6ms | ActiveRecord: 17.4ms | Allocations: 7817)
+
+
+Started GET "/" for 10.0.1.23 at 2022-08-15 10:28:05 +0000
+Cannot render console from 10.0.1.23! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.8ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (2.9ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.8ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 22.2ms | Allocations: 5348)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.3ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 25.4ms | Allocations: 7429)
+Completed 200 OK in 29ms (Views: 11.9ms | ActiveRecord: 14.0ms | Allocations: 7817)
+
+
+Started GET "/" for 10.0.16.213 at 2022-08-15 10:28:06 +0000
+Cannot render console from 10.0.16.213! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (3.0ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (3.0ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.9ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.8ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 22.3ms | Allocations: 5348)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.3ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 25.7ms | Allocations: 7429)
+Completed 200 OK in 29ms (Views: 11.9ms | ActiveRecord: 14.3ms | Allocations: 7817)
+
+
+Started GET "/" for 10.0.1.23 at 2022-08-15 10:28:35 +0000
+Cannot render console from 10.0.1.23! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.7ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 21.6ms | Allocations: 5348)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.3ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 24.9ms | Allocations: 7429)
+Completed 200 OK in 28ms (Views: 11.6ms | ActiveRecord: 13.8ms | Allocations: 7817)
+
+
+Started GET "/" for 10.0.16.213 at 2022-08-15 10:28:36 +0000
+Cannot render console from 10.0.16.213! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.8ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 22.0ms | Allocations: 5348)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.4ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 25.4ms | Allocations: 7429)
+Completed 200 OK in 28ms (Views: 12.1ms | ActiveRecord: 13.8ms | Allocations: 7817)
+
+
+Started GET "/" for 10.0.1.23 at 2022-08-15 10:29:05 +0000
+Cannot render console from 10.0.1.23! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.8ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (2.9ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (4.3ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.8ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 24.1ms | Allocations: 5350)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.4ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 27.5ms | Allocations: 7431)
+Completed 200 OK in 31ms (Views: 12.6ms | ActiveRecord: 15.5ms | Allocations: 7820)
+
+
+Started GET "/" for 10.0.16.213 at 2022-08-15 10:29:06 +0000
+Cannot render console from 10.0.16.213! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FruitsController#index as HTML
+  Rendering layout layouts/application.html.slim
+  Rendering fruits/index.html.slim within layouts/application
+  Fruit Load (2.8ms)  SELECT `fruits`.* FROM `fruits` ORDER BY `fruits`.`row_order` ASC
+  ↳ app/views/fruits/index.html.slim:13
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 18 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.6ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 39 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Attachment Load (2.8ms)  SELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 19 AND `active_storage_attachments`.`record_type` = 'Fruit' AND `active_storage_attachments`.`name` = 'image' LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  ActiveStorage::Blob Load (2.7ms)  SELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 41 LIMIT 1
+  ↳ app/views/fruits/index.html.slim:16
+  Rendered fruits/index.html.slim within layouts/application (Duration: 21.5ms | Allocations: 5348)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_navigation_links.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_navigation.html.slim (Duration: 0.3ms | Allocations: 152)
+  Rendered layouts/_messages.html.slim (Duration: 0.1ms | Allocations: 48)
+  Rendered layout layouts/application.html.slim (Duration: 24.7ms | Allocations: 7429)
+Completed 200 OK in 28ms (Views: 11.6ms | ActiveRecord: 13.7ms | Allocations: 7817)
