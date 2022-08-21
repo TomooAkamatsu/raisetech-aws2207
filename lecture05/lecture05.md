@@ -19,3 +19,15 @@ ActiveStorage を用いてアップロードした画像が S3 に保存され�
 ## 構成図
 
 <img src="https://user-images.githubusercontent.com/102135163/185725426-11751911-f501-4737-8fd2-8fd152b4cf7e.png" width="80%">
+
+## Nginx と Unicorn で起動
+
+無事 S3 との接続が上手くいきました！！
+Nginx の設定ファイルの proxy_set_header の設定が足りていませんでした。
+<img src="https://user-images.githubusercontent.com/102135163/185800009-25617c0a-9961-4ded-8e33-23dfd4a98df7.gif" width="80%">
+
+## 自動起動設定
+
+「reboot -> 接続 -> 起動確認」のスクリーンショット
+
+<img src="https://user-images.githubusercontent.com/102135163/185800087-8d3ff661-136e-4c67-9122-b60c3baa4ccc.png" width="80%">
