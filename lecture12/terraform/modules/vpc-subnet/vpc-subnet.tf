@@ -15,7 +15,7 @@ resource "aws_vpc" "vpc" {
   }
 }
 
-### パブリックサブネット ####################
+### サブネット ####################
 
 resource "aws_subnet" "subnets_a" {
   count = 2
@@ -40,28 +40,6 @@ resource "aws_subnet" "subnets_c" {
     Name = "subnet-c-${count.index + 2}"
   }
 }
-
-### プライベートサブネット ####################
-
-# resource "aws_subnet" "private_subnet_a" {
-#   vpc_id                  = aws_vpc.vpc.id
-#   cidr_block              = cidrsubnet(aws_vpc.vpc.cidr_block, 8, 3)
-#   availability_zone       = "ap-northeast-1a"
-#   map_public_ip_on_launch = true
-#   tags = {
-#     Name = "private-subnet-a"
-#   }
-# }
-
-# resource "aws_subnet" "private_subnet_c" {
-#   vpc_id                  = aws_vpc.vpc.id
-#   cidr_block              = cidrsubnet(aws_vpc.vpc.cidr_block, 8, 4)
-#   availability_zone       = "ap-northeast-1c"
-#   map_public_ip_on_launch = true
-#   tags = {
-#     Name = "private-subnet-c"
-#   }
-# }
 
 ### サブネットグループ ####################
 
