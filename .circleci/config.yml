@@ -16,14 +16,11 @@ jobs:
   check_by_tflint:
     executor: terraform/default
     steps:
+      - checkout
       - install-tflint
       - run:
           name: tflint
-          command : |
-            pwd
-            ls 
-            
-            # cd lecture12/terraform/dev && tflint --init && tflint
+          command : cd lecture12/terraform/dev && tflint --init && tflint
 
 workflows:
   deploy_infrastructure:
