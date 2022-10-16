@@ -21,8 +21,8 @@ jobs:
       - run:
           name: tflint
           command : |
-            terraform init
-            cd lecture12/terraform/dev && tflint --init && tflint
+            cd lecture12/terraform/dev && terraform init
+            tflint --init && tflint
 
 workflows:
   deploy_infrastructure:
