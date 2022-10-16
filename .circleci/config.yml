@@ -5,6 +5,15 @@ orbs:
   terraform-tflint: hqo/terraform@1.0.3
   ruby: circleci/ruby@1.8.0
 
+jobs:
+  check_by_tflint:
+    executor: terraform/default
+    steps:
+      - install-tflint
+      - run:
+          name: tflint
+          command : cd lecture12/terraform/dev && tflint --init && tflint
+
 workflows:
   deploy_infrastructure:
     jobs:
@@ -18,7 +27,9 @@ workflows:
           path: lecture12/terraform/dev
           requires:
             - terraform/fmt
-      - terraform-tflint/tflint
+      - check_by_tflint:
+          requires:
+            - terraform/validate
       - terraform/plan:
           checkout: true
           context: terraform
