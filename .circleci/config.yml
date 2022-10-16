@@ -15,6 +15,7 @@ commands:
 jobs:
   check_by_tflint:
     executor: terraform/default
+    init:
     steps:
       - checkout
       - install-tflint
@@ -44,7 +45,7 @@ workflows:
           path: lecture12/terraform/dev
           persist-workspace: true
           requires:
-            - terraform/validate
+            - check_by_tflint
       - terraform/apply:
           attach-workspace: true
           context: terraform
