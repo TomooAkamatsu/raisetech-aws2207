@@ -19,7 +19,11 @@ jobs:
       - install-tflint
       - run:
           name: tflint
-          command : cd lecture12/terraform/dev && tflint --init && tflint
+          command : |
+            pwd
+            ls 
+            
+            # cd lecture12/terraform/dev && tflint --init && tflint
 
 workflows:
   deploy_infrastructure:
