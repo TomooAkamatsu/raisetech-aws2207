@@ -6,7 +6,8 @@ orbs:
 
 jobs:
   check_by_tflint:
-    executor: terraform/default
+    docker:
+      - image: hashicorp/terraform
     steps:
       - checkout
       - run:
