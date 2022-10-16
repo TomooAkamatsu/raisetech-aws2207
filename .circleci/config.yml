@@ -25,7 +25,7 @@ workflows:
           path: lecture12/terraform/dev
           persist-workspace: true
           requires:
-            - terraform-tflint/tflint
+            - terraform/validate
       - terraform/apply:
           attach-workspace: true
           context: terraform
