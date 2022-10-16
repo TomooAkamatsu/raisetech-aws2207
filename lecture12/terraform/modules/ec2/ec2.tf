@@ -2,13 +2,10 @@ variable "vpc_id"{
 }
 variable "public_subnet_a"{
 }
-variable "instance_type" {
-  
-}
 
 resource "aws_instance" "ec2" {
   ami                    = "ami-0ecb2a61303230c9d"
-  instance_type          = var.instance_type
+  instance_type          = "t2.micro"
   key_name               = "udemysample"
   subnet_id              = var.public_subnet_a
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]

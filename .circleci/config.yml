@@ -20,7 +20,7 @@ jobs:
       - install-tflint
       - run:
           name: tflint
-          command : |
+          command: |
             cd lecture12/terraform/dev && terraform init
             tflint --init && tflint
 
@@ -47,12 +47,12 @@ workflows:
           persist-workspace: true
           requires:
             - check_by_tflint
-      - terraform/apply:
-          attach-workspace: true
-          context: terraform
-          path: lecture12/terraform/dev
-          filters:
-            branches:
-              only: main
-          requires:
-            - terraform/plan
+      # - terraform/apply:
+      #     attach-workspace: true
+      #     context: terraform
+      #     path: lecture12/terraform/dev
+      #     filters:
+      #       branches:
+      #         only: main
+      #     requires:
+      #       - terraform/plan
