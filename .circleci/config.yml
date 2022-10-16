@@ -15,13 +15,14 @@ commands:
 jobs:
   check_by_tflint:
     executor: terraform/default
-    init:
     steps:
       - checkout
       - install-tflint
       - run:
           name: tflint
-          command : cd lecture12/terraform/dev && tflint --init && tflint
+          command : |
+            terraform init
+            cd lecture12/terraform/dev && tflint --init && tflint
 
 workflows:
   deploy_infrastructure:
