@@ -4,7 +4,7 @@ module "vpc_subnet" {
   cidr_block = "10.0.0.0/16"
 }
 
-module "routing" {
+modul "routing" {
   source = "../modules/routing"
 
   vpc_id          = module.vpc_subnet.vpc_id
