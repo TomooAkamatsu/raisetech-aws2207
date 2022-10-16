@@ -12,7 +12,8 @@ jobs:
       - run:
           name: tflint
           command: |
-            cd lecture12/terraform/dev && tflint
+            curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+            cd lecture12/terraform/dev && tflint --init && tflint
 
 workflows:
   deploy_infrastructure:
