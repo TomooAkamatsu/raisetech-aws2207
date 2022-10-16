@@ -4,7 +4,7 @@ module "vpc_subnet" {
   cidr_block = "10.0.0.0/16"
 }
 
-modul "routing" {
+module "routing" {
   source = "../modules/routing"
 
   vpc_id          = module.vpc_subnet.vpc_id
@@ -17,6 +17,7 @@ module "ec2" {
 
   vpc_id          = module.vpc_subnet.vpc_id
   public_subnet_a = module.vpc_subnet.public_subnet_a
+  instance_type = "t4.micro"
 }
 
 module "rds" {
