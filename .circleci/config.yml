@@ -6,7 +6,7 @@ orbs:
 
 jobs:
   check_by_tflint:
-    executor: ruby/default
+    executor: terraform/default
     steps:
       - checkout
       - run:
