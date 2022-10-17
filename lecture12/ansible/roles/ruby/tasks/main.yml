@@ -67,5 +67,5 @@
 #   git:
 #     repo: https://github.com/sstephenson/ruby-build.git
 #     dest: /usr/local/rbenv/plugins/ruby-build
-# - name: Install Ruby
-#   shell: rbenv install 2.6.3
+- name: Install Ruby
+  shell: rbenv install 2.6.3
