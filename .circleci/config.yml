@@ -32,6 +32,7 @@ jobs:
           fingerprints:
             - b5:a8:cb:13:7d:b6:19:9b:5f:53:e4:e8:ca:75:41:e4
       - ansible/install:
+          version: 2.10.3
       - ansible/playbook:
           playbook: lecture12/ansible/playbook.yml
           playbook-options: "-u ec2-user -i lecture12/ansible/inventory --private-key ~/.ssh/udemysample.pem"
