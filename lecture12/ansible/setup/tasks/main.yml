@@ -1,0 +1,11 @@
+- name: Git clone rails-app
+  git:
+    repo: https://github.com/yuta-ushijima/raisetech-live8-sample-app.git
+    dest: /var/www/raisetech-live8-sample-app
+
+- name: Install bundle and rails
+  shell:
+    cmd: |
+      bundle install
+      gem install rails -v "6.1.6.1”
+    chdir: /var/www/raisetech-live8-sample-app

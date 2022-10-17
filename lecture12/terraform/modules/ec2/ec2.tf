@@ -13,10 +13,6 @@ resource "aws_instance" "ec2" {
   user_data = <<EOF
   #! /bin/bash
   sudo yum -y update
-  sudo yum -y install mysql
-  sudo yum -y install httpd
-  sudo systemctl start httpd.service
-  sudo systemctl enable httpd.service
   EOF
 
   tags = {

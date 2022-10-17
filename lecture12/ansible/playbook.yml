@@ -3,3 +3,7 @@
   become: yes
   roles:
     - { role: git, tags: git }
+    - { role: mysql, tags: mysql }
+    - { role: nodejs, tags: nodejs }
+    - { role: ruby, tags: ruby }
+    # - { role: setup, tags: setup }
