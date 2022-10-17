@@ -1,0 +1,5 @@
+---
+- hosts: ec2
+  become: yes
+  roles:
+    - { role: git, tags: git }

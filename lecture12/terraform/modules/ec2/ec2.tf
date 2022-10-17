@@ -24,9 +24,9 @@ resource "aws_instance" "ec2" {
   }
 }
 
-resource "aws_eip" "eip" {
-  instance = aws_instance.ec2.id
-  vpc      = true
+resource "aws_eip_association" "eip_assoc"{
+  instance_id = aws_instance.ec2.id
+  public_ip   = "13.230.244.252"
 }
 
 resource "aws_security_group" "ec2_sg" {

@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   terraform: circleci/terraform@3.1.0
   terraform-tflint: hqo/terraform@1.0.3
+  ansible-playbook: orbss/ansible-playbook@0.0.5
   ruby: circleci/ruby@1.8.0
 
 commands:
@@ -23,6 +24,16 @@ jobs:
           command: |
             cd lecture12/terraform/dev && terraform init
             tflint --init && tflint
+  ansible:
+    executor: ansible-playbook/default
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - b5:a8:cb:13:7d:b6:19:9b:5f:53:e4:e8:ca:75:41:e4
+      - ansible-playbook/playbook:
+          playbook: lecture12/ansible/playbook.yml"
+          playbook-options: "-u ec2-user -i lecture12/ansible/inventory --private-key ~/.ssh/udemysample.pem"
 
 workflows:
   deploy_infrastructure:
@@ -47,12 +58,15 @@ workflows:
           persist-workspace: true
           requires:
             - check_by_tflint
-      # - terraform/apply:
-      #     attach-workspace: true
-      #     context: terraform
-      #     path: lecture12/terraform/dev
-      #     filters:
-      #       branches:
-      #         only: main
-      #     requires:
-      #       - terraform/plan
+      - terraform/apply:
+          attach-workspace: true
+          context: terraform
+          path: lecture12/terraform/dev
+          filters:
+            branches:
+              only: main
+          requires:
+            - terraform/plan
+      - ansible:
+          requires:
+            - terraform/apply
