@@ -1,0 +1,63 @@
+---
+- name: Install Ruby dependences packages
+  yum:
+    name:
+      - gcc-c++
+      - make
+      - patch
+      - curl
+      - zlib-devel
+      - openssl-devel
+      - ImageMagick-devel
+      - readline-devel
+      - libcurl-devel
+      - libffi-devel
+      - libicu-devel
+      - libxml2-devel
+      - libxslt-devel
+      - mysql-devel
+    state: latest
+
+- name: Registration yarn on Yum repo
+  shell: curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+
+- name: Install yarn
+  yum:
+    name: yarn
+    state: latest
+
+- name: git clone rbenv,ruby-build
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+  register: RESULT
+  with_items:
+    - repo: https://github.com/sstephenson/rbenv.git
+      dest: ~/.rbenv
+    - repo: https://github.com/sstephenson/ruby-build.git
+      dest: ~/.rbenv/plugins/ruby-build
+
+- name: install rbenv and ruby
+  shell: "{{ item.cmd }}"
+  register: RESULT
+  with_items:
+    - cmd: echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+    - cmd: echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+# - name: Git clone rbenv
+#   git:
+#     repo: https://github.com/rbenv/rbenv.git
+#     dest: /usr/local/rbenv
+
+# - name: make rbenv PATH
+#   template:
+#     src: roles/ruby/templates/rbenv_system.sh.j2
+#     dest: /etc/profile.d/rbenv.sh
+#     owner: ec2-user
+#     group: ec2-user
+
+# - name: Git clone ruby_build
+#   git:
+#     repo: https://github.com/sstephenson/ruby-build.git
+#     dest: /usr/local/rbenv/plugins/ruby-build
+# - name: Install Ruby
+#   shell: rbenv install 2.6.3
