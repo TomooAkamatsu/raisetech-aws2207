@@ -1,11 +1,14 @@
 - name: Git clone rails-app
   git:
-    repo: https://github.com/yuta-ushijima/raisetech-live8-sample-app.git
+    repo: https://github.com/TomooAkamatsu/raisetech-live8-sample-app.git
     dest: /var/www/raisetech-live8-sample-app
 
 - name: Install bundle and rails
   become: yes
-  shell: bash -lc "bundle install"
+  shell: bash -lc "{{ item }}"
+  with_items:
+    - gem install bundler:2.3.14
+    - bundle install
   args:
     chdir: /var/www/raisetech-live8-sample-app
 
@@ -22,8 +25,7 @@
     - rails s -p 3000 -b 0.0.0.0
   args:
     chdir: /var/www/raisetech-live8-sample-app
-
-  # cmd: |
-  #   bash -lc "bundle install"
-  #   bash -lc "gem install rails -v "6.1.6.1”"
-  # chdir: /var/www/raisetech-live8-sample-app
+# cmd: |
+#   bash -lc "bundle install"
+#   bash -lc "gem install rails -v "6.1.6.1”"
+# chdir: /var/www/raisetech-live8-sample-app
