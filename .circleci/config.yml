@@ -39,6 +39,8 @@ jobs:
             aws rds describe-db-instances --filters "Name=db-instance-id,Values=terraform-db-instance" --query 'DBInstances[].[Endpoint.Address]' --output text | xargs -I{} echo "export db_endpoint={}" >> $BASH_ENV
             source $BASH_ENV
             echo ${db_endpoint}
+            echo ${db_endpoint}
+            echo ${db_endpoint}
 
   executor-ansible:
     executor: ansible/default
