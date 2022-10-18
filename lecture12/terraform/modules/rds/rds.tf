@@ -8,6 +8,7 @@ variable "db_subnet_group_name" {
 
 
 resource "aws_db_instance" "rds" {
+  identifier           = "terraform-db-instance"
   allocated_storage    = 20
   storage_type         = "gp2"
   engine               = "mysql"

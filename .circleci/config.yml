@@ -4,6 +4,7 @@ orbs:
   terraform: circleci/terraform@3.1.0
   terraform-tflint: hqo/terraform@1.0.3
   ansible: orbss/ansible-playbook@0.0.5
+  aws-cli: circleci/aws-cli@3.1.3
   ruby: circleci/ruby@1.8.0
 
 commands:
@@ -24,6 +25,22 @@ jobs:
           command: |
             cd lecture12/terraform/dev && terraform init
             tflint --init && tflint
+  get_resource_info:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - aws-cli/setup:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-region: AWS_DEFAULT_REGION
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+      - run:
+          name: get resource info
+          command: |
+            DB_ENDPOINT_NAME = $(aws rds describe-db-instances --filters "Name=db-instance-id,Values=terraform-db-instance" --query 'DBInstances[].[Endpoint.Address]' --output text)
+            echo "export db_endpoint=${DB_ENDPOINT_NAME}" >> $BASH_ENV
+            source $BASH_ENV
+            echo ${db_endpoint}
+
   executor-ansible:
     executor: ansible/default
     steps:
@@ -69,6 +86,9 @@ workflows:
               only: main
           requires:
             - terraform/plan
-      - executor-ansible:
+      - get_resource_info:
           requires:
             - terraform/apply
+      - executor-ansible:
+          requires:
+            - get_resource_info
