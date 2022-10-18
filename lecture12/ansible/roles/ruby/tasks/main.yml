@@ -26,26 +26,33 @@
     name: yarn
     state: latest
 
-- name: git clone rbenv,ruby-build
-  git:
-    repo: "{{ item.repo }}"
-    dest: "{{ item.dest }}"
-  register: RESULT
-  with_items:
-    - repo: https://github.com/sstephenson/rbenv.git
-      dest: "{{ rbenv_root }}"
-    - repo: https://github.com/sstephenson/ruby-build.git
-      dest: "{{ rbenv_root }}/plugins/ruby-build"
+# - name: git clone rbenv,ruby-build
+#   git:
+#     repo: "{{ item.repo }}"
+#     dest: "{{ item.dest }}"
+#   register: RESULT
+#   with_items:
+#     - repo: https://github.com/sstephenson/rbenv.git
+#       dest: "{{ rbenv_root }}"
+#     - repo: https://github.com/sstephenson/ruby-build.git
+#       dest: "{{ rbenv_root }}/plugins/ruby-build"
 
-- name: make rbenv PATH
-  template:
-    src: roles/ruby/templates/rbenv_system.sh.j2
-    dest: /etc/profile.d/rbenv.sh
-    owner: ec2-user
-    group: ec2-user
+# - name: make rbenv PATH
+#   template:
+#     src: roles/ruby/templates/rbenv_system.sh.j2
+#     dest: /etc/profile.d/rbenv.sh
+#     owner: ec2-user
+#     group: ec2-user
 
-- name: source rbenv.sh
-  shell: source /etc/profile.d/rbenv.sh
+# - name: source rbenv.sh
+#   shell: source /etc/profile.d/rbenv.sh
 
 - name: Install Ruby
-  shell: bash -lc "rbenv install 2.6.3"
+  yum:
+    name: https://github.com/feedforce/ruby-rpm/releases/download/2.6.3/ruby-2.6.3-1.el7.centos.x86_64.rpm
+    state: present
+# - name: Install Ruby
+#   shell: bash -lc "yum install -y https://github.com/feedforce/ruby-rpm/releases/download/2.6.3/ruby-2.6.3-1.el7.centos.x86_64.rpm"
+
+# - name: Install Ruby
+#   shell: bash -lc "CONFIGURE_OPTS="--disable-install-rdoc" rbenv install 2.6.3"
