@@ -36,8 +36,7 @@ jobs:
       - run:
           name: get resource info
           command: |
-            aws rds describe-db-instances --filters "Name=db-instance-id,Values=terraform-db-instance" --query 'DBInstances[].[Endpoint.Address]' --output text
-            echo "export db_endpoint=${DB_ENDPOINT_NAME}" >> $BASH_ENV
+            aws rds describe-db-instances --filters "Name=db-instance-id,Values=terraform-db-instance" --query 'DBInstances[].[Endpoint.Address]' --output text | xargs -I{} echo "export db_endpoint={}" >> $BASH_ENV
             source $BASH_ENV
             echo ${db_endpoint}
 
