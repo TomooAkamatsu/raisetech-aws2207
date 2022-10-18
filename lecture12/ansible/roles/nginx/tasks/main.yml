@@ -1,0 +1,12 @@
+---
+- name: Install nginx
+  become: yes
+  shell: bash -lc "{{ item }}"
+  with_items:
+    - yum clean metadata
+    - yes | yum install nginx
+
+- name: setup nginx.conf
+  template:
+    src: roles/nginx/templates/nginx_conf.j2
+    dest: /etc/nginx/nginx.conf

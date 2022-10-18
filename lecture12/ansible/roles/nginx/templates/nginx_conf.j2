@@ -1,0 +1,64 @@
+user  nginx;
+    worker_processes  1;
+
+    error_log  /var/log/nginx/error.log warn;
+    pid        /var/run/nginx.pid;
+
+
+    events {
+        worker_connections  1024;
+    }
+
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+
+        log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                          '$status $body_bytes_sent "$http_referer" '
+                          '"$http_user_agent" "$http_x_forwarded_for"';
+
+        access_log  /var/log/nginx/access.log  main;
+
+        sendfile        on;
+        #tcp_nopush     on;
+
+        keepalive_timeout  65;
+
+        #gzip  on;
+
+        # include /etc/nginx/conf.d/*.conf;
+
+    upstream unicorn {
+        server unix:/var/www/raisetech-live8-sample-app/tmp/sockets/unicorn.sock;  #アプリケーション名
+    }
+
+    server {
+          listen 3000;
+          server_name 13.114.48.147;
+          access_log /var/log/nginx/app_access.log;
+          error_log /var/log/nginx/app_error.log;
+          try_files $uri/index.html @unicorn;
+
+          root home/ec2-user/var/www/raisetech-live8-sample-app/public; #アプリケーション名
+          client_max_body_size 15M;
+          client_body_temp_path /tmp/client_body;
+
+          location @unicorn {
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header Host $http_host;
+          proxy_pass http://unicorn;
+          }
+
+          location ~ ^/assets/ {
+            root /var/www/raisetech-live8-sample-app/public;
+          }
+          error_page 404 /404.html;
+            location = /404.html {
+          }
+          error_page 500 502 503 504 /500.html;
+            location = /500.html {
+          }
+      }
+    }
