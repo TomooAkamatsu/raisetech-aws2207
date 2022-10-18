@@ -39,6 +39,18 @@ jobs:
             aws rds describe-db-instances --filters "Name=db-instance-id,Values=terraform-db-instance" --query 'DBInstances[].[Endpoint.Address]' --output text | xargs -I{} echo "export DB_ENDPOINT={}" >> $BASH_ENV
             source $BASH_ENV
             echo ${DB_ENDPOINT}
+  serverspec:
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+          name: set
+          command: |
+            gem install bundler
+            gem install serverspec
+            echo ${KEY_FINGERPRINT} > ~/.ssh/udemysample.pem
+            mv lecture12/spec/config ~/.ssh/
+            rake spec
 
   executor-ansible:
     executor: ansible/default
@@ -91,3 +103,6 @@ workflows:
       - executor-ansible:
           requires:
             - get_resource_info
+      - serverspec:
+          requires:
+            - executor-ansible
