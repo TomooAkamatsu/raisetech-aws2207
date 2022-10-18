@@ -22,6 +22,8 @@
   with_items:
     - rails db:create
     - rails db:migrate
+    - rails webpacker:install
+    - rails webpacker:compile
     - rails s -p 3000 -b 0.0.0.0
   args:
     chdir: /var/www/raisetech-live8-sample-app

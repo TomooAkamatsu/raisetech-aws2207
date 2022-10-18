@@ -63,7 +63,7 @@ resource "aws_lb_listener_rule" "alb_listener_rule" {
 resource "aws_lb_target_group_attachment" "alb_target_group_attaches" {
   target_group_arn = aws_lb_target_group.alb_tg.arn
   target_id        = var.ec2_id
-  port             = 80
+  port             = 3000
 }
 
 resource "aws_security_group" "alb_sg" {
