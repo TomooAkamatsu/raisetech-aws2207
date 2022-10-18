@@ -6,4 +6,4 @@
     - { role: mysql, tags: mysql }
     - { role: nodejs, tags: nodejs }
     - { role: ruby, tags: ruby }
-    # - { role: setup, tags: setup }
+    - { role: setup, tags: setup }

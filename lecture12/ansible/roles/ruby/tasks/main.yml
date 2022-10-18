@@ -33,26 +33,9 @@
   register: RESULT
   with_items:
     - repo: https://github.com/sstephenson/rbenv.git
-      dest: /usr/local/rbenv
+      dest: "{{ rbenv_root }}"
     - repo: https://github.com/sstephenson/ruby-build.git
-      dest: /usr/local/rbenv/plugins/ruby-build
-# - name: install rbenv and ruby
-#   shell: "{{ item.cmd }}"
-#   register: RESULT
-#   with_items:
-#     - cmd: echo 'export PATH="/usr/local/rbenv/bin:$PATH"' >> ~/.bash_profile
-#     - cmd: echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
-
-# - name: make rbenv PATH
-#   blockinfile:
-#     path: ~/.bash_profile
-#     block: |
-#       export PATH="/usr/local/rbenv/bin:$PATH"
-
-# - name: Git clone rbenv
-#   git:
-#     repo: https://github.com/rbenv/rbenv.git
-#     dest: /usr/local/rbenv
+      dest: "{{ rbenv_root }}/plugins/ruby-build"
 
 - name: make rbenv PATH
   template:
@@ -63,9 +46,6 @@
 
 - name: source rbenv.sh
   shell: source /etc/profile.d/rbenv.sh
-# - name: Git clone ruby_build
-#   git:
-#     repo: https://github.com/sstephenson/ruby-build.git
-#     dest: /usr/local/rbenv/plugins/ruby-build
+
 - name: Install Ruby
-  shell: rbenv install 2.6.3
+  shell: bash -lc "rbenv install 2.6.3"
