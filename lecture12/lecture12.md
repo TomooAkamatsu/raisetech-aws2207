@@ -29,7 +29,7 @@
 
 ```
 .
-├── ansible.cfg //
+├── ansible.cfg
 ├── .circleci
 │   └── config.yml
 └── lecture12
