@@ -48,8 +48,10 @@ jobs:
           command: |
             gem install bundler
             gem install serverspec
+            gem install rake
             echo ${KEY_FINGERPRINT} > ~/.ssh/udemysample.pem
             mv lecture12/spec/config ~/.ssh/
+            cd lecture12
             rake spec
 
   executor-ansible:
