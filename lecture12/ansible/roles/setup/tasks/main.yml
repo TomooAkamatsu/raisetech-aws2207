@@ -18,7 +18,7 @@
   args:
     chdir: /var/www/raisetech-live8-sample-app
 
-- name: start
+- name: Prepare DB and webpacker and start server
   shell: bash -lc "{{ item }}"
   with_items:
     - rails db:create
@@ -29,7 +29,3 @@
     - sudo systemctl start nginx.service
   args:
     chdir: /var/www/raisetech-live8-sample-app
-# cmd: |
-#   bash -lc "bundle install"
-#   bash -lc "gem install rails -v "6.1.6.1”"
-# chdir: /var/www/raisetech-live8-sample-app
