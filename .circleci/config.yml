@@ -89,4 +89,4 @@ workflows:
             - terraform/apply
       - serverspec:
           requires:
-            - executor-ansible
+            - setup-by-ansible
