@@ -25,36 +25,7 @@ jobs:
           command: |
             cd lecture12/terraform/dev && terraform init
             tflint --init && tflint
-  get_resource_info:
-    executor: aws-cli/default
-    steps:
-      - checkout
-      - aws-cli/setup:
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-region: AWS_DEFAULT_REGION
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-      - run:
-          name: get resource info
-          command: |
-            aws rds describe-db-instances --filters "Name=db-instance-id,Values=terraform-db-instance" --query 'DBInstances[].[Endpoint.Address]' --output text | xargs -I{} echo "export DB_ENDPOINT={}" >> $BASH_ENV
-            source $BASH_ENV
-            echo ${DB_ENDPOINT}
-  serverspec:
-    executor: ruby/default
-    steps:
-      - checkout
-      - run:
-          name: set
-          command: |
-            gem install bundler
-            gem install serverspec
-            gem install rake
-            echo ${KEY_FINGERPRINT} > ~/.ssh/udemysample.pem
-            mv lecture12/spec/config ~/.ssh/
-            cd lecture12
-            rake spec
-
-  executor-ansible:
+  setup-by-ansible:
     executor: ansible/default
     steps:
       - checkout
@@ -66,6 +37,20 @@ jobs:
       - ansible/playbook:
           playbook: lecture12/ansible/playbook.yml
           playbook-options: "-u ec2-user -i lecture12/ansible/inventory --private-key ~/.ssh/udemysample.pem"
+  serverspec:
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+          name: set
+          command: |
+            gem install bundler
+            gem install serverspec
+            gem install rake
+            echo ${KEY_FINGERPRINT} > ~/.ssh/serverspec.pem
+            mv lecture12/spec/config ~/.ssh/
+            cd lecture12
+            rake spec
 
 workflows:
   deploy_infrastructure:
@@ -99,12 +84,9 @@ workflows:
               only: main
           requires:
             - terraform/plan
-      - get_resource_info:
+      - setup-by-ansible:
           requires:
             - terraform/apply
-      - executor-ansible:
-          requires:
-            - get_resource_info
       - serverspec:
           requires:
             - executor-ansible

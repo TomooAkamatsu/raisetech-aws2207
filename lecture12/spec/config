@@ -2,4 +2,4 @@ Host ec2
   HostName 13.230.244.252
   Port 22
   User ec2-user
-  IdentityFile ~/.ssh/udemysample.pem
+  IdentityFile ~/.ssh/serverspec.pem
